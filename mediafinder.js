@@ -7,6 +7,7 @@ var Uri = require('./uris.js');
 
 var GLOBAL_config = {
   DEBUG: true,
+  REMOVE_BEFORE_DAYS: 7,
   TRANSLATE: false,
   PART_OF_SPEECH: false,
   NAMED_ENTITY_EXTRACTION: false,
@@ -277,16 +278,10 @@ var mediaFinder = {
           var $ = window.document;
           var match = 'the-image';
           try {
-            var image = $.getElementById(match);
-            if (image) {
-              mediaUrl = image.src;
-              callback(mediaUrl);
-            } else {
-              callback(false);
-            }
+            mediaUrl = $.getElementById(match).src;
+            callback(mediaUrl);
           } catch(e) {
-            //throw('ERROR: img.ly screen scraper broken');
-            throw(e);
+            throw('ERROR: img.ly screen scraper broken');
           }
         });
       } catch(e) {
@@ -594,6 +589,18 @@ var mediaFinder = {
       );
     }
 
+
+    /**
+     * Filters out the items that are older than *days*
+     */
+    function removeOld(items, days) {
+        var d = +new Date();
+        return items.filter(function(item) {
+          return (item.timestamp > (d - (3600 * 24 * 1000 * days)));
+        })
+    }
+
+
     /**
      * Collects results to be sent back to the client
      */
@@ -619,7 +626,7 @@ var mediaFinder = {
           spotlight(json);
         }
       } else {
-        pendingRequests[service] = json;
+        pendingRequests[service] = GLOBAL_config.REMOVE_BEFORE_DAYS ? removeOld(json, GLOBAL_config.REMOVE_BEFORE_DAYS) : json;
       }
     }
 
