@@ -595,9 +595,13 @@ var mediaFinder = {
      */
     function removeOld(items, days) {
         var d = +new Date();
-        return items.filter(function(item) {
-          return (item.timestamp > (d - (3600 * 24 * 1000 * days)));
-        })
+        days = parseInt(days);
+        if (items && days > 0) {
+          return items.filter(function(item) {
+            return (item.timestamp > (d - (3600 * 24 * 1000 * days)));
+          });
+        }
+        return items;
     }
 
 
@@ -733,7 +737,7 @@ var mediaFinder = {
         request.get(options, function(err, reply, body) {
           var results = [];
           // when no results are found, the MySpace API returns 404
-          if (reply.statusCode === 404) {
+          if (reply && reply.statusCode === 404) {
             collectResults(results, currentService, pendingRequests);
             return;
           }
