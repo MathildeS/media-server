@@ -1782,19 +1782,33 @@ var mediaFinder = {
     if (service === 'combined') {
       var serviceNames = Object.keys(services);
       var pendingRequests = {};
+      var numberOfPendingRequests = 0;
       serviceNames.forEach(function(serviceName) {
         pendingRequests[serviceName] = false;
         services[serviceName](pendingRequests);
       });
-
       var length = serviceNames.length;
-      var intervalTimeout = 500;
-      var timeout = 60 * intervalTimeout;
+      var intervalTimeout = 250;
+      // var timeout = 60 * intervalTimeout;
+
+      // key is passedTime, value is allowed max number of pending requests
+      // e.g. if 6.5sec has been passed and there are still 1 or 2 pending requests
+      // we don't wait for them but return data to client
+      var timeouts = {
+        7000 : 1,
+        8500 : 2,
+        10000 : 3,
+        12000 : "timeout"
+      };
       var passedTime = 0;
       var interval = setInterval(function() {
         passedTime += intervalTimeout;
+        numberOfPendingRequests = Object.keys(pendingRequests).filter(function(key) { return !pendingRequests[key]; }).length;
+        
+        // if (GLOBAL_config.DEBUG) console.log("Passed time: " + passedTime + ", Number of pending requests: " + numberOfPendingRequests);
         for (var i = 0; i < length; i++) {
-          if (passedTime >= timeout) {
+          // if (passedTime >= timeout) {
+          if (timeouts[passedTime] === "timeout" || (numberOfPendingRequests <= timeouts[passedTime])) {
             if (GLOBAL_config.DEBUG) console.log('Timeout');
             break;
           }
