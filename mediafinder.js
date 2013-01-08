@@ -1781,6 +1781,7 @@ var mediaFinder = {
     }
     if (service === 'combined') {
       var serviceNames = Object.keys(services);
+      console.log(serviceNames);
       var pendingRequests = {};
       var numberOfPendingRequests = 0;
       serviceNames.forEach(function(serviceName) {
@@ -1792,13 +1793,13 @@ var mediaFinder = {
       // var timeout = 60 * intervalTimeout;
 
       // key is passedTime, value is allowed max number of pending requests
-      // e.g. if 6.5sec has been passed and there are still 1 or 2 pending requests
+      // e.g. if 8.5sec has been passed and there are still 1 or 2 pending requests
       // we don't wait for them but return data to client
       var timeouts = {
-        7000 : 1,
-        8500 : 2,
-        10000 : 3,
-        12000 : "timeout"
+        10000 : 1,
+        12500 : 2,
+        15000 : 3,
+        20000 : "timeout"
       };
       var passedTime = 0;
       var interval = setInterval(function() {
