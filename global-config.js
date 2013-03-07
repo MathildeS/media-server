@@ -1,5 +1,6 @@
 module.exports = {
   DEBUG: true,
+  PROVIDER_SETTINGS: 'RBB',
   REMOVE_BEFORE_DAYS: 7,
   TRANSLATE: false,
   PART_OF_SPEECH: false,
@@ -15,6 +16,7 @@ module.exports = {
   GOOGLE_KEY: 'AIzaSyC5GxhDFxBHTKCLNMYtYm6o1tiagi65Ufc',
   GOOGLE_RESEARCH_API_KEY: 'DQAAAMcAAAAcGiug619uBnQa2Joxo2vPo2Bup-s062p1fLvLpRM9Mc7IdRUeJ-YZUv9BcuXgAdWcg1uu5YrIRLvzA_eojgOmpGF6wF3Bsd5pYAczmtTeNcpgzdWI5otAToWwPkSuRRulDUqAUZdnCXwjuR8XTobYVLNNmO-sqVeXIwaT593vH2eDGycOoYyeDEji0jmPTXkvqV9_T20u7Zb5jWcl2b-Kz5B6n2OuKSIZjRU_8bqKzasAQD5r9ycFY5uWTQPyUA3lFRqdgS0tTDPpFL9-bXFP',
   IMGUR_KEY: '9b7d0e62bfaacc04db0b719c998d225e',  
+  YOUTUBE_KEY: 'AIzaSyCf-hN5N4RaIKzDjx2gsXuQ4A2hCEWbnhE',
   HEADERS: {
     "Accept": "application/json, text/javascript, */*",
     "Accept-Charset": "ISO-8859-1,utf-8;q=0.7,*;q=0.3",

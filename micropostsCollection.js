@@ -298,7 +298,8 @@ var collectResults = function(json, service, pendingRequests,callback) {
           spotlight(json,callback);
         }
       } else {
-        pendingRequests[service] = GLOBAL_config.REMOVE_BEFORE_DAYS ? removeOld(json, GLOBAL_config.REMOVE_BEFORE_DAYS) : json;
+        //pendingRequests[service] = GLOBAL_config.REMOVE_BEFORE_DAYS ? removeOld(json, GLOBAL_config.REMOVE_BEFORE_DAYS) : json;
+	pendingRequests[service] =  json;
       }
     };
 

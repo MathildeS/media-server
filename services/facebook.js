@@ -9,8 +9,8 @@ var Step = require('../step.js');
 function getContent(pendingRequests) {
 	var query = module.parent.exports.query;
 	var callback = module.parent.exports.callback;
-        var currentService = 'Facebook';
-        if (GLOBAL_config.DEBUG) console.log(currentService + ' *** ' + query);
+   var currentService = 'Facebook';
+   if (GLOBAL_config.DEBUG) console.log(currentService + ' *** ' + query);
         var params = {
           q: query,
           limit: 100,

@@ -12,8 +12,8 @@ var mediaFinder = {
     
   
     var services = {
-      GooglePlus: require('./services/googlePlus.js'),
-      MySpace: require('./services/mySpace.js'),
+      //GooglePlus: require('./services/googlePlus.js'),
+      //MySpace: require('./services/mySpace.js'),
       /*
       MySpaceVideos: function(pendingRequests) {
         var currentService = 'MySpaceVideos';
@@ -34,18 +34,21 @@ var mediaFinder = {
         });
       },
       */
-      Facebook: require('./services/facebook.js'),
-      TwitterNative: require('./services/twitterNative.js'),
-      Twitter: require('./services/twitter.js'),
-      Instagram: require('./services/instagram.js'),
-      YouTube: require('./services/youTube.js'), 
-      FlickrVideos: function (pendingRequests) {
+      //Facebook: require('./services/facebook.js'),
+      //TwitterNative: require('./services/twitterNative.js'),
+      //Twitter: require('./services/twitter.js'),
+      //Instagram: require('./services/instagram.js'),
+      //YouTube: require('./services/youTube.js'), 
+      YouTubeAll: require('./services/youTubeAll.js'),
+      /*FlickrVideos: function (pendingRequests) {
 	services.Flickr(pendingRequests, true);
-      },
-      Flickr: require('./services/flickr.js'),
-      MobyPicture: require('./services/mobyPicture.js'),
-      TwitPic: require ('./services/twitPic.js'),
-      Lockerz: require('./services/lockerz.js')
+      },*/
+      //Flickr: require('./services/flickr.js'),
+      Arte7: require('./services/arte7.js'),
+      //MobyPicture: require('./services/mobyPicture.js'),
+      //TwitPic: require ('./services/twitPic.js'),
+      //Lockerz: require('./services/lockerz.js'),
+      UEP: require('./services/uep.js')
     };
     
     if (services[service]) {
