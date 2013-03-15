@@ -62,7 +62,7 @@ function getContentChannel(pendingRequests, channel){
           part: 'id',
           type: 'video',
           q: query,         
-          maxResults: 30, 
+          maxResults: 10, 
           key: GLOBAL_config.YOUTUBE_KEY
         };
 	if (channel !== null) params['channelId']= channel;

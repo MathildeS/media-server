@@ -313,7 +313,8 @@ var collectResults = function(json, service, pendingRequests,callback) {
 	  delete pendingRequests['UEP'];
 	}
 	else pendingRequests[service]=json;
-	if (GLOBAL_config.CALL_TYPE === 'freshMedia') {
+	var freshMediaServices = require('./freshMedia.js');	   
+	if (freshMediaServices.indexOf(service) >= 0 ) {
 	  pendingRequests[service] = GLOBAL_config.REMOVE_BEFORE_DAYS ? removeOld(json, GLOBAL_config.REMOVE_BEFORE_DAYS) : json;
 	} 
       }
