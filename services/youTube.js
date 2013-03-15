@@ -9,7 +9,7 @@ var Step = require('../step.js');
 function getContent(pendingRequests) {		
 	var query = module.parent.exports.query;
 	var callback = module.parent.exports.callback;
-	var currentService = 'FreshYouTube';
+	var currentService = 'YouTube';
         if (GLOBAL_config.DEBUG) console.log(currentService + ' *** ' + query);
         var params = {
           v: 2,

@@ -39,8 +39,8 @@ var mediaFinder = {
       TwitterNative: require('./services/twitterNative.js'),
       Twitter: require('./services/twitter.js'),
       Instagram: require('./services/instagram.js'),
-      FreshYouTube: require('./services/youTube.js'), 
-      YouTube: require('./services/youTubeAll.js'),
+      YouTube: require('./services/youTube.js'), 
+      YouTubeRBB: require('./services/youTubeAll.js'),
       FlickrVideos: function (pendingRequests) {
 	services.Flickr(pendingRequests, true);
       },

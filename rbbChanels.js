@@ -5,7 +5,7 @@ var channels = {
   Phoenix: 'UCwyiPnNlT8UABRmGmU0T9jg'
 };
 
-var servicesNames = ['YouTube', 'Arte7','UEP'];
+var servicesNames = ['YouTubeRBB', 'Arte7','UEP'];
 
 module.exports.channels = channels;
 module.exports.servicesNames = servicesNames;

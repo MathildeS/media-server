@@ -7,7 +7,7 @@ var Step = require('../step.js');
 var rbbChannels = require('../rbbChanels.js').channels;
 var svChannels = require('../svChannels.js').channels;
 
-var currentService = 'YouTube';
+var currentService = 'YouTubeRBB';
 var results ;
 var query ;
 var callback ;
