@@ -1,9 +1,15 @@
-module.exports={
+var channels = {
   ARD: 'UCqmQ1b96-PNH4coqgHTuTlA' ,
   RBB_Radio_Fritz:'UCZdFybPe8pX8zIAgyCp5gDA',
   Tagesschau: 'UC5NOEUbkLheQcaaRldYW5GA',
   Phoenix: 'UCwyiPnNlT8UABRmGmU0T9jg'
 };
+
+var servicesNames = ['YouTube', 'Arte7','UEP'];
+
+module.exports.channels = channels;
+module.exports.servicesNames = servicesNames;
+
   
 /*
 

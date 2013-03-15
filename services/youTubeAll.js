@@ -4,10 +4,10 @@ var request = require('request');
 var mCollection = require('../micropostsCollection.js');
 var cleanMessage= require('../cleanMessages.js');
 var Step = require('../step.js');
-var rbb = require('../rbbChanels.js');
-var sv = require('../svChannels.js');
+var rbbChannels = require('../rbbChanels.js').channels;
+var svChannels = require('../svChannels.js').channels;
 
-var currentService = 'YouTubeAll';
+var currentService = 'YouTube';
 var results ;
 var query ;
 var callback ;
@@ -22,27 +22,26 @@ function getContent(pendingRequests) {
   numberCalls = 0;
   totalCalls = 0;
   
-  if (GLOBAL_config.DEBUG) console.log(currentService + ' *** ' + query);
-  
-  if (GLOBAL_config.PROVIDER_SETTINGS === 'RBB') { 
+  if (GLOBAL_config.DEBUG) console.log(currentService + ' *** ' + query);  
+  if (GLOBAL_config.CALL_TYPE === 'RBB') { 
     console.log('searching RBB authorized channels');
-    for (var channel in rbb) {
+    for (var channel in rbbChannels) {
       console.log(channel);      
       totalCalls++;
-      getContentChannel(pendingRequests, rbb[channel]);	
+      getContentChannel(pendingRequests, rbbChannels[channel]);	
     }
     if (totalCalls ===0) {
-      console.log('no channel defined by SV, searching all YouTube');
+      console.log('no channel defined by RBB, searching all YouTube');
       totalCalls = 1;
       getContentChannel(pendingRequests, null);
     }
   }
-  else if (GLOBAL_config.PROVIDER_SETTINGS === 'SV'){
+  else if (GLOBAL_config.CALL_TYPE === 'SV'){
     console.log('searching SV authorized channels');    
-    for (var channel in sv) {
+    for (var channel in svChannels) {
       console.log(channel);
       totalCalls++;
-      getContentChannel(pendingRequests, sv[channel]);	
+      getContentChannel(pendingRequests, svChannels[channel]);	
     }
     if (totalCalls ===0) {
       console.log('no channel defined by SV, searching all YouTube');
@@ -115,7 +114,7 @@ function getContentChannel(pendingRequests, channel){
 			    micropostUrl: 'http://www.youtube.com/watch?v='+item.id,
 			    micropost: cleanMessage.cleanMicropost(
                             item.snippet.title + '. ' + item.snippet.description),
-			    userProfileUrl: item.snippet.channelId,
+			    userProfileUrl: 'https://www.youtube.com/channel/'+item.snippet.channelId,
 			    type: 'video',
 			    timestamp: timestamp,
 			    publicationDate: cleanMessage.getIsoDateString(timestamp),

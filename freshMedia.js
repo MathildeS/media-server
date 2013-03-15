@@ -1,0 +1,1 @@
+module.exports = ['GooglePlus', 'MySpace', 'Facebook', 'TwitterNative', 'Twitter', 'Instagram', 'FreshYouTube', 'FlickrVideos', 'Flickr', 'MobyPicture', 'TwitPic', 'Lockerz'];

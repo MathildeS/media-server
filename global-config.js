@@ -1,6 +1,6 @@
 module.exports = {
   DEBUG: true,
-  PROVIDER_SETTINGS: 'RBB',
+  CALL_TYPE: 'RBB',
   REMOVE_BEFORE_DAYS: 7,
   TRANSLATE: false,
   PART_OF_SPEECH: false,

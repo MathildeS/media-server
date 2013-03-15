@@ -7,13 +7,14 @@ var callback;
 var mediaFinder = {
   search: function search(service, query, callback) {
     
-    this.query = query;
-    this.callback = callback;
+    GLOBAL_config.CALL_TYPE=service; 
     
+    this.query = query;
+    this.callback = callback;    
   
     var services = {
-      //GooglePlus: require('./services/googlePlus.js'),
-      //MySpace: require('./services/mySpace.js'),
+      GooglePlus: require('./services/googlePlus.js'),
+      MySpace: require('./services/mySpace.js'),
       /*
       MySpaceVideos: function(pendingRequests) {
         var currentService = 'MySpaceVideos';
@@ -34,28 +35,50 @@ var mediaFinder = {
         });
       },
       */
-      //Facebook: require('./services/facebook.js'),
-      //TwitterNative: require('./services/twitterNative.js'),
-      //Twitter: require('./services/twitter.js'),
-      //Instagram: require('./services/instagram.js'),
-      //YouTube: require('./services/youTube.js'), 
-      YouTubeAll: require('./services/youTubeAll.js'),
-      /*FlickrVideos: function (pendingRequests) {
+      Facebook: require('./services/facebook.js'),
+      TwitterNative: require('./services/twitterNative.js'),
+      Twitter: require('./services/twitter.js'),
+      Instagram: require('./services/instagram.js'),
+      FreshYouTube: require('./services/youTube.js'), 
+      YouTube: require('./services/youTubeAll.js'),
+      FlickrVideos: function (pendingRequests) {
 	services.Flickr(pendingRequests, true);
-      },*/
-      //Flickr: require('./services/flickr.js'),
+      },
+      Flickr: require('./services/flickr.js'),
       Arte7: require('./services/arte7.js'),
-      //MobyPicture: require('./services/mobyPicture.js'),
-      //TwitPic: require ('./services/twitPic.js'),
-      //Lockerz: require('./services/lockerz.js'),
+      MobyPicture: require('./services/mobyPicture.js'),
+      TwitPic: require ('./services/twitPic.js'),
+      Lockerz: require('./services/lockerz.js'),
       UEP: require('./services/uep.js')
     };
     
+    // depending on the request, we call different services
     if (services[service]) {
       services[service]();
     }
-    if (service === 'combined') {
-      var serviceNames = Object.keys(services);
+    
+    else {
+      var servicesNames = {}; 
+      var servicesFile;
+      switch(GLOBAL_config.CALL_TYPE) {
+	case 'combined':
+	  serviceNames = Object.keys(services);
+	  break;
+	case 'freshMedia': 
+	  servicesFile = require('./freshMedia.js');
+	  serviceNames = Object.keys(services).filter(function(key) { return (servicesFile.indexOf(key) >= 0 ); });
+	  break;
+	case 'RBB':
+	  servicesFile = require('./rbbChanels.js').servicesNames;
+	  serviceNames = Object.keys(services).filter(function(key) { return (servicesFile.indexOf(key) >= 0 ); });
+	  break;
+	case 'SV': 
+	  serviceNames = Object.keys(services);
+	  break;
+	default: 
+	  // TODO send error 
+      }
+    
       console.log(serviceNames);
       var pendingRequests = {};
       var numberOfPendingRequests = 0;

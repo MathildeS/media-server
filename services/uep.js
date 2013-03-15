@@ -9,8 +9,8 @@ function getContent(pendingRequests) {
         var currentService = 'UEP';
         if (GLOBAL_config.DEBUG) console.log(currentService + ' *** ' + query);
         var options = {
-          url: 'http://ir.lmcloud.vse.cz:8080/irapi/media-server/?q=' +
-              encodeURIComponent(query),
+          url: 'http://ir.lmcloud.vse.cz:8080/irapi/media-server/?q=img_src:* AND img_title:*' +
+              encodeURIComponent(query) +'*',
           headers: GLOBAL_config.HEADERS
         };	
         var results = [];
@@ -18,10 +18,13 @@ function getContent(pendingRequests) {
         request.get(options, function(err, reply, body) {
 	  try {
             body = JSON.parse(body);
+	    if (Object.keys(body).length){	      
+	      results = body;	      
+	    }
 	  } catch(e) {
             // noop
           }
-	  mCollection.collectResults(body, currentService, pendingRequests,callback);
+	  mCollection.collectResults(results, currentService, pendingRequests,callback);
         });
       };
       

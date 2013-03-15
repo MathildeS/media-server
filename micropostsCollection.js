@@ -272,14 +272,24 @@ var removeOld = function(items, days) {
         return items;
     };
     
+    
+    
+    
  /**
      * Collects results to be sent back to the client
      */  
     
 var collectResults = function(json, service, pendingRequests,callback) {
       if (GLOBAL_config.DEBUG) console.log('collectResults for ' + service);
-      if (!pendingRequests) {
-        if (service !== 'combined') {
+      if (!pendingRequests) {        
+	
+	if (service === 'UEP') {
+	  var temp = json;
+          json = {};
+	  modifyUEPresults(temp,json);	 
+	}
+	
+	else if (service !== 'combined') {
           var temp = json;
           json = {};
           json[service] = temp;
@@ -295,13 +305,33 @@ var collectResults = function(json, service, pendingRequests,callback) {
         if (GLOBAL_config.TRANSLATE) {
           translate(json);
         } else {
-          spotlight(json,callback);
-        }
+          spotlight(json,callback);	  
+	}        
       } else {
-        //pendingRequests[service] = GLOBAL_config.REMOVE_BEFORE_DAYS ? removeOld(json, GLOBAL_config.REMOVE_BEFORE_DAYS) : json;
-	pendingRequests[service] =  json;
+	 if (service === 'UEP') {
+	  modifyUEPresults(json, pendingRequests);
+	  delete pendingRequests['UEP'];
+	}
+	else pendingRequests[service]=json;
+	if (GLOBAL_config.CALL_TYPE === 'freshMedia') {
+	  pendingRequests[service] = GLOBAL_config.REMOVE_BEFORE_DAYS ? removeOld(json, GLOBAL_config.REMOVE_BEFORE_DAYS) : json;
+	} 
       }
     };
+    
+    
+      
+    /**
+    * Change the service's names if service is UEP: every source address is considered as a service
+    */
+var modifyUEPresults = function(initialJson, arrayRequests){
+  var sources = typeof initialJson === 'object' ? Object.keys(initialJson) : [];  
+  sources.forEach(function(sourceName) {
+    arrayRequests[sourceName] = initialJson[sourceName];   
+  });
+}
+
+       
 
     /**
      * Sends results back to the client
