@@ -23,7 +23,7 @@ function getContent(pendingRequests) {
   totalCalls = 0;
   
   if (GLOBAL_config.DEBUG) console.log(currentService + ' *** ' + query);  
-  if (GLOBAL_config.CALL_TYPE === 'RBB') { 
+  if (GLOBAL_config.CALL_TYPE === 'RBB' || GLOBAL_config.CALL_TYPE === 'combined') { 
     console.log('searching RBB authorized channels');
     for (var channel in rbbChannels) {
       console.log(channel);      
