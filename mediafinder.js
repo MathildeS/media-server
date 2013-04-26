@@ -39,8 +39,8 @@ var mediaFinder = {
       TwitterNative: require('./services/twitterNative.js'),
       Twitter: require('./services/twitter.js'),
       Instagram: require('./services/instagram.js'),
-      YouTube: require('./services/youTube.js'), 
-      YouTubeRBB: require('./services/youTubeAll.js'),
+      YouTube_fresh: require('./services/youTubeAll.js'), 
+      YouTube: require('./services/youTubeAll.js'),
       FlickrVideos: function (pendingRequests) {
 	services.Flickr(pendingRequests, true);
       },
@@ -69,11 +69,12 @@ var mediaFinder = {
 	  serviceNames = Object.keys(services).filter(function(key) { return (servicesFile.indexOf(key) >= 0 ); });
 	  break;
 	case 'RBB':
-	  servicesFile = require('./rbbChanels.js').servicesNames;
+	  servicesFile = require('./rbbChannels.js').servicesNames;
 	  serviceNames = Object.keys(services).filter(function(key) { return (servicesFile.indexOf(key) >= 0 ); });
 	  break;
 	case 'SV': 
-	  serviceNames = Object.keys(services);
+	  servicesFile = require('./svChannels.js').servicesNames;
+	  serviceNames = Object.keys(services).filter(function(key) { return (servicesFile.indexOf(key) >= 0 ); });
 	  break;
 	default: 
 	  // TODO send error 

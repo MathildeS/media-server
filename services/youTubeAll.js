@@ -4,10 +4,10 @@ var request = require('request');
 var mCollection = require('../micropostsCollection.js');
 var cleanMessage= require('../cleanMessages.js');
 var Step = require('../step.js');
-var rbbChannels = require('../rbbChanels.js').channels;
+var rbbChannels = require('../rbbChannels.js').channels;
 var svChannels = require('../svChannels.js').channels;
 
-var currentService = 'YouTubeRBB';
+var currentService = 'YouTube';
 var results ;
 var query ;
 var callback ;
@@ -23,7 +23,7 @@ function getContent(pendingRequests) {
   totalCalls = 0;
   
   if (GLOBAL_config.DEBUG) console.log(currentService + ' *** ' + query);  
-  if (GLOBAL_config.CALL_TYPE === 'RBB' || GLOBAL_config.CALL_TYPE === 'combined') { 
+  if (GLOBAL_config.CALL_TYPE === 'RBB') { 
     console.log('searching RBB authorized channels');
     for (var channel in rbbChannels) {
       console.log(channel);      
@@ -50,6 +50,7 @@ function getContent(pendingRequests) {
     }
   }
   else {
+    // if "combined" or "fresh" query
     console.log('searching all YouTube');
     totalCalls = 1;
     getContentChannel(pendingRequests, null);
@@ -62,7 +63,7 @@ function getContentChannel(pendingRequests, channel){
           part: 'id',
           type: 'video',
           q: query,         
-          maxResults: 10, 
+          maxResults: 5, 
           key: GLOBAL_config.YOUTUBE_KEY
         };
 	if (channel !== null) params['channelId']= channel;

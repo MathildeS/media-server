@@ -1,6 +1,8 @@
 var mediaFinder = require('./mediafinder.js');
 var express = require('express');
 var app = express.createServer();
+var inputError = {'error': 'the query should be on the following format: search/queryType/keyword',
+		  'queryType': ['freshMedia', 'RBB', 'SV', 'combined']}; 
 
 app.configure(function() {
   app.use(express.methodOverride());
@@ -30,7 +32,9 @@ function search(req, res, next) {
     res.setHeader('Content-Type', 'application/json; charset=UTF-8');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
-    if (req.query.callback) {
+    if (service !== 'combined' && service!=='RBB' && service!=='SV' && service!=='freshMedia')
+    { res.send(inputError);}
+    else if (req.query.callback) {
       res.send(req.query.callback + '(' + JSON.stringify(json) + ')');
     } else {
       res.send(json);
