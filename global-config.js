@@ -1,6 +1,5 @@
 module.exports = {
   DEBUG: true,
-  CALL_TYPE: 'RBB',
   REMOVE_BEFORE_DAYS: 7,
   TRANSLATE: false,
   PART_OF_SPEECH: false,
