@@ -42,6 +42,6 @@ function search(req, res, next) {
   });
 }
 
-var port = process.env.PORT || 8001;
+var port = process.env.PORT || 8002;
 app.listen(port);
 console.log('node.JS running on ' + port);
