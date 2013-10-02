@@ -5,7 +5,7 @@ var channels = {
   Rijksmuseum: 'UCEXuPfYt1M3e8DT1LDeSfVg'
 };
 
-var servicesNames = ['YouTube','UEP'];
+var servicesNames = ['YouTube','UEP','WikimediaCommons'];
 
 module.exports.channels = channels;
 module.exports.servicesNames = servicesNames;

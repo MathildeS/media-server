@@ -39,7 +39,7 @@ var mediaFinder = {
       TwitterNative: require('./services/twitterNative.js'),
       Twitter: require('./services/twitter.js'),
       Instagram: require('./services/instagram.js'),
-      YouTube_fresh: require('./services/youTubeAll.js'), 
+      YouTube_fresh: require('./services/youTube.js'), 
       YouTube: require('./services/youTubeAll.js'),
       FlickrVideos: function (pendingRequests) {
 	services.Flickr(pendingRequests, true);
@@ -49,7 +49,8 @@ var mediaFinder = {
       MobyPicture: require('./services/mobyPicture.js'),
       TwitPic: require ('./services/twitPic.js'),
       Lockerz: require('./services/lockerz.js'),
-      UEP: require('./services/uep.js')
+      UEP: require('./services/uep.js'),
+      WikimediaCommons: require('./services/wikimediaCommons.js')
     };
     
     // depending on the request, we call different services
