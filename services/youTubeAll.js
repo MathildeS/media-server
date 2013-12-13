@@ -136,8 +136,13 @@ function getContentChannel(pendingRequests, channel){
 		    }
 		    ); 
 		  }
+          else {
+          numberCalls ++;
+          if (numberCalls === totalCalls) mCollection.collectResults(results, currentService, pendingRequests,callback);
+          }
 		} catch (e) {		  
-		  cb();  // ??
+		  numberCalls ++;
+          if (numberCalls === totalCalls) mCollection.collectResults(results, currentService, pendingRequests,callback);
 		}
 	      });	
 	    }
@@ -146,7 +151,8 @@ function getContentChannel(pendingRequests, channel){
 	      if (numberCalls === totalCalls) mCollection.collectResults(results, currentService, pendingRequests,callback);
 	    }
           } catch(e) {	    
-	    numberCalls ++;            
+	    numberCalls ++;
+        if (numberCalls === totalCalls) mCollection.collectResults(results, currentService, pendingRequests,callback);
           }
         });
       };
