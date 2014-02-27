@@ -1,1 +1,46 @@
-MediaServer test
+MEDIA COLLECTOR
+forked from vuknje/media-server, forked from tomayac/media-server
+
+This module performs call to diverse social media platforms online in order to retrieve media related to a given keyword. Initially, fresh media only were searched, but the actual module also deals with older media items. 
+more info in LinkedTV deliverable D2.5
+
+
+* General installation
+install node and npm (npm = node package manager)
+run "npm install" : will install the dependencies in the file package.json
+
+>> node server.js
+go to localhost:8002/search/combined/france
+
+
+* Use 
+perform call to whateverTheAdressIs/search/queryType/keyword
+querytype is one of 
+- freshMedia (only returns fresh media)
+- RBB (returns results from RBB white list)
+- SV (returns results from SV white list)
+- combined (returns a combination of all results)
+
+
+* Structure
+|-- server.js : the entry point of the media collector. reads the requests are process them ("search" function) by calling functions in mediafinder.js
+
+|-- mediafinder.js : the main function of the media collector module. It lists the available services in "var services" and then, depending on the call made, it will call diverse combination of these services. 
+
+|-- services : contains the files coresponding to the calls to the diverse services. The name of each file makes sense. 
+
+|-- global-config.js : contains all the developper keys used to access the diverse apis. Other global configuration details are stored here. 
+
+|-- package.json : specifies dependencies and describes the module
+
+|-- micropostCollection.js : a utility file for collecting and sending results. Also includes a "spotlight" and a "translate" functions, but they are not used in the current project
+
+|-- svChannels.js and rbbChannels.js : the white lists for each provider. channels are youtube channels ids, and services are the services that should be called (from the white list)
+
+|-- freshMedia.js : list of fresh media servies called when using the "freshMedia" call
+
+|-- step.js, uris.js, twitterScrapers.js, cleanMessages.js : utility files
+
+
+* Structure of the results 
+more info in LinkedTV deliverable D2.5
